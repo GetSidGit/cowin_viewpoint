@@ -1,0 +1,79 @@
+--------------------
+Date: 27:5:2021
+Time: 23:26
+Phone number: +919581147571
+Message: Hello World
+--------------------
+Date: 27:5:2021
+Time: 0:0
+Phone number: +919581147571
+Message: Hello World
+--------------------
+Date: 27:5:2021
+Time: 23:34
+Phone number: +919581147571
+Message: Hello World
+--------------------
+Date: 27:5:2021
+Time: 23:35
+Phone number: +919581147571
+Message: Hello World
+--------------------
+Date: 27:5:2021
+Time: 23:37
+Phone number: +919581147571
+Message: Hello World
+--------------------
+Date: 28:5:2021
+Time: 0:17
+Phone number: +919581147571
+Message: Open Slot detected for 45 plus on 28-05-2021 in pincode : 500032 For Dosage : 2
+Location :AIG CVC Two
+Address :Mind Space Road Gachibowli
+Vaccine Name :COVAXIN
+Slot :['09:30AM-10:30AM', '10:30AM-11:30AM', '11:30AM-12:30PM', '12:30PM-04:00PM']
+Price : 1250 INR
+--------------------
+Date: 28:5:2021
+Time: 0:19
+Phone number: +919581147571
+Message: Open Slot detected for 45 plus on 28-05-2021 in pincode : 500032 For Dosage : 2
+Location :AIG CVC Two
+Address :Mind Space Road Gachibowli
+Vaccine Name :COVAXIN
+Slot :['09:30AM-10:30AM', '10:30AM-11:30AM', '11:30AM-12:30PM', '12:30PM-04:00PM']
+Price : 1250 INR
+--------------------
+Date: 28:5:2021
+Time: 0:22
+Phone number: +919581147571
+Message: Open Slot detected for 45 plus on 28-05-2021 in pincode : 500032 For Dosage : 2
+Location :AIG CVC Two
+Address :Mind Space Road Gachibowli
+Vaccine Name :COVAXIN
+Slot :['09:30AM-10:30AM', '10:30AM-11:30AM', '11:30AM-12:30PM', '12:30PM-04:00PM']
+Price : 1250 INR
+        --- @getsidgit 
+--------------------
+Date: 28:5:2021
+Time: 0:26
+Phone number: +919581147571
+Message: Open Slot detected for 45 plus on 28-05-2021 in pincode : 500032 For Dosage : 2
+Location :AIG CVC Two
+Address :Mind Space Road Gachibowli
+Vaccine Name :COVAXIN
+Slot :['09:30AM-10:30AM', '10:30AM-11:30AM', '11:30AM-12:30PM', '12:30PM-04:00PM']
+Price : 1250 INR
+        --- @getsidgit 
+--------------------
+Date: 28:5:2021
+Time: 0:27
+Phone number: +918291027561
+Message: Open Slot detected for 45 plus on 28-05-2021 in pincode : 500032 For Dosage : 2
+Location :AIG CVC Two
+Address :Mind Space Road Gachibowli
+Vaccine Name :COVAXIN
+Slot :['09:30AM-10:30AM', '10:30AM-11:30AM', '11:30AM-12:30PM', '12:30PM-04:00PM']
+Price : 1250 INR
+        --- @getsidgit 
+--------------------

@@ -1,13 +1,23 @@
-import urllib.request, json, ssl, sys, time, datetime
+import urllib.request, json, ssl, sys, time, datetime, pywhatkit
 
 
-def print_message(session_dict, pincode, date):
-    print("Open Slot detected for : ", date, "in pincode : ", pincode)
-    print("Location :", session_dict["name"])
-    print("Address :", session_dict["address"])
-    print("Vaccine Name :", session_dict["vaccine"])
-    print("Slot :", session_dict["slots"])
-    print("Price : ", session_dict["fee"], " INR")
+def print_message(session_dict, pincode, date, dosage, above_18):
+
+    if above_18:
+        age_string = "18 plus"
+    else:
+        age_string = "45 plus"
+
+    message = "Open Slot detected for " + age_string + " on " + str(date) + \
+              " in pincode : " + str(pincode) + " For Dosage : " + str(dosage) + "\n" + \
+              "Location :" + str(session_dict["name"]) + "\n" + \
+              "Address :" + str(session_dict["address"]) + "\n" + \
+              "Vaccine Name :" + str(session_dict["vaccine"]) + "\n" + \
+              "Slot :" + str(session_dict["slots"]) + "\n" + \
+              "Price : " + str(session_dict["fee"])  + " INR" + "\n" + \
+              "        --- @getsidgit "
+
+    return message
 
 def cowin_search(endpoint_base, location_pincode, search_date, above_18, dosages, sleep):
 
@@ -15,6 +25,7 @@ def cowin_search(endpoint_base, location_pincode, search_date, above_18, dosages
     ssl_context.check_hostname = False
     ssl_context.verify_mode = ssl.CERT_NONE
     atleast_one_slot_found = 0
+
     for date in search_date:
         atleast_one_slot_found = 0
         for pin in location_pincode:
@@ -34,17 +45,17 @@ def cowin_search(endpoint_base, location_pincode, search_date, above_18, dosages
                     for session_entry in vaccine_center_data['sessions']:
                         if above_18 and session_entry['min_age_limit'] == 18:
                             if session_entry["available_capacity_dose" + str(dosage)] != 0:
-                                print_message(session_entry, pin, date)
+                                message = print_message(session_entry, pin, date, dosage, above_18)
                                 atleast_one_slot_found = 1
-                                return atleast_one_slot_found
+                                return atleast_one_slot_found, message
                                 break
                         elif above_18 is not True:
                             if session_entry["available_capacity_dose" + str(dosage)] != 0:
-                                print_message(session_entry, pin, date)
+                                message = print_message(session_entry, pin, date, dosage, above_18)
                                 atleast_one_slot_found = 1
-                                return atleast_one_slot_found
+                                return atleast_one_slot_found, message
                                 break
-                time.sleep(5)
+                time.sleep(sleep)
 
             if atleast_one_slot_found == 1:
                 break
@@ -53,7 +64,7 @@ def cowin_search(endpoint_base, location_pincode, search_date, above_18, dosages
             print("No Slots found for : ", date, " In Pincodes : ", location_pincode, "For dosages : ", dosages)
         else:
             break
-    return atleast_one_slot_found
+    return atleast_one_slot_found, ""
 
 # Read config
 
@@ -79,10 +90,17 @@ for day in range(days):
     new_date = base_date + datetime.timedelta(days=day)
     dates_list.append(str(new_date.strftime("%d-%m-%Y")))
 
+message = ""
+
 while True:
-    is_slot_found = cowin_search(endpoint_base, location_pincode, dates_list, above_18, dosages, 5)
+    is_slot_found, alert_message = cowin_search(endpoint_base, location_pincode, dates_list, above_18, dosages, 5)
     if is_slot_found == 1:
-        print("Slot found ! Out of while now !")
+        print("Slot found !")
+        for phone_number in alert_mobiles:
+            print("Triggering Message alert to : ", phone_number)
+            trigger_time = datetime.datetime.now() + datetime.timedelta(0, 100)
+            pywhatkit.sendwhatmsg(phone_number, alert_message, trigger_time.hour, trigger_time.minute)
+        print(alert_message)
         break
 
 
