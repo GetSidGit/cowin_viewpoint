@@ -10,6 +10,7 @@ def print_message(session_dict, pincode, date, dosage, above_18):
 
     message = "Open Slot detected for " + age_string + " on " + str(date) + \
               " in pincode : " + str(pincode) + " For Dosage : " + str(dosage) + "\n" + \
+              "Available Dose Capacity :" + str(session_dict["available_capacity_dose" + str(dosage)]) + "\n" + \
               "Location :" + str(session_dict["name"]) + "\n" + \
               "Address :" + str(session_dict["address"]) + "\n" + \
               "Vaccine Name :" + str(session_dict["vaccine"]) + "\n" + \
@@ -66,9 +67,18 @@ def cowin_search(endpoint_base, location_pincode, search_date, above_18, dosages
             break
     return atleast_one_slot_found, ""
 
+def trigger_message_alert(user_number, alert_message, time_delay):
+    print("Triggering Message alert to : ", user_number)
+    trigger_time = datetime.datetime.now() + datetime.timedelta(0, time_delay)
+    try:
+        pywhatkit.sendwhatmsg(phone_number, alert_message, trigger_time.hour, trigger_time.minute)
+        print("Alert sent successfully with below message : ")
+        print(alert_message)
+    except:
+        print("Unexpected Error encountered : Verify if make sure, time delay is above 60 seconds")
 # Read config
-
-with open("cowin_user_config.json") as config_data:
+path = "/users/sid/PycharmProjects/cowin/"
+with open(path + "cowin_user_config.json") as config_data:
     user_config = json.load(config_data)
 
 endpoint_base = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?"
@@ -92,15 +102,21 @@ for day in range(days):
 
 message = ""
 
+reference_time = datetime.datetime.now() + datetime.timedelta(0, 900)
+
 while True:
-    is_slot_found, alert_message = cowin_search(endpoint_base, location_pincode, dates_list, above_18, dosages, 5)
+
+    current_time = datetime.datetime.now()
+    if current_time > reference_time:
+        print("I'm Alive at : ", current_time)
+        reference_time = datetime.datetime.now() + datetime.timedelta(0, 900)
+
+    is_slot_found, alert_text_message = cowin_search(endpoint_base, location_pincode, dates_list, above_18, dosages, 5)
     if is_slot_found == 1:
         print("Slot found !")
+        threads = []
         for phone_number in alert_mobiles:
-            print("Triggering Message alert to : ", phone_number)
-            trigger_time = datetime.datetime.now() + datetime.timedelta(0, 100)
-            pywhatkit.sendwhatmsg(phone_number, alert_message, trigger_time.hour, trigger_time.minute)
-        print(alert_message)
+            trigger_message_alert(phone_number, alert_text_message, 80)
         break
 
 
