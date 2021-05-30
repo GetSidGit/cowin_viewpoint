@@ -1,7 +1,10 @@
 {
-    "Pincodes" : ["500080", "500090", "500032", "500034", "500033", "500029", "500004", "500082", "500072", "500049"],
+    "State" : "Telangana",
+    "Districts" : ["Hyderabad"],
+    "Pincodes" : ["500009"],
     "Days" : 7,
-    "Mobile_Numbers": ["+918291027561", "+919581147571"],
-    "Dosage" : [1],
-    "18_plus" : "True"
+    "Mobile_Numbers": ["+919581147571"],
+    "Dosage" : [2],
+    "18_plus" : "False",
+    "Drive_path_for_heartbeat" : "/Users/sid/Desktop/Desktop/"
 }
