@@ -1,10 +1,11 @@
 {
     "State" : "Telangana",
-    "Districts" : ["Hyderabad"],
-    "Pincodes" : ["500009"],
+    "Districts" : ["Hyderabad", "Medchal", "Rangareddy", "Sangareddy"],
+    "Pincodes" : ["all"],
     "Days" : 7,
     "Mobile_Numbers": ["+919581147571"],
-    "Dosage" : [2],
-    "18_plus" : "False",
-    "Drive_path_for_heartbeat" : "/Users/sid/Desktop/Desktop/"
+    "Dosage" : [1],
+    "18_plus" : "True",
+    "Drive_path_for_heartbeat" : "/Users/sid/Desktop/Desktop/",
+    "twilio_account_sid|auth_token|source_number_with_countrycode" : "AC579aacd3b14307b341dfa087b0fe6b63|85c42bcc02627e29b6fc357756eb9f96|+14155238886"
 }

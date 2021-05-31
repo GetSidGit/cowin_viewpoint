@@ -1,10 +1,11 @@
 import pathlib
 import ssl
+import os
 from cowin import *
 
 # Set base paths
-log_path = "/Users/sid/log_dump/cowin/"
-path = "/users/sid/PycharmProjects/cowin/"
+log_path = os.path.expanduser('~/log_dump/cowin/')
+path = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 # Read config file
 with open(path + "cowin_user_config.json") as config_data:
@@ -23,6 +24,7 @@ above_18 = bool(user_config["18_plus"] == "True")
 dosages = user_config['Dosage']
 alert_mobiles = user_config['Mobile_Numbers']
 drive_location = user_config['Drive_path_for_heartbeat']
+twilio_string = user_config['twilio_account_sid|auth_token|source_number_with_countrycode']
 
 # set endpoints - For faster search, we no more hit findbypin endpoint but rely on district level info
 district_endpoint_base_url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?"
@@ -49,29 +51,30 @@ for day in range(days):
     new_date = base_date + datetime.timedelta(days=day)
     dates_list.append(str(new_date.strftime("%d-%m-%Y")))
 
+drive_path_present = False
+if drive_location is not None and drive_location != "":
+    drive_path_present = True
+
 # Initialize message
 message = ""
 
 # Initialize variable to publish alive beat for every 15 minutes
 reference_time = datetime.datetime.now() + datetime.timedelta(0, 900)
-pathlib.Path('/Users/sid/Desktop/Desktop/cowin_alive.log').touch()
+if drive_path_present:
+    pathlib.Path(drive_location + '/cowin_alive.log').touch()
 
 # Load district lookup
 file = open(path + "districts_reference.json", "r")
 district_details = json.load(file)
 file.close()
+
 # Initiate the main execution - No point of return from now !
-
-drive_path_present = False
-if drive_location is not None and drive_location != "":
-    drive_path_present = True
-
 while True:
     current_time = datetime.datetime.now()
     if current_time > reference_time:
         write_runtime_message(log_path, "I'm Alive at : " + str(current_time))
         if drive_path_present:
-            pathlib.Path('/Users/sid/Desktop/Desktop/cowin_alive.log').touch()
+            pathlib.Path(drive_location + '/cowin_alive.log').touch()
         reference_time = datetime.datetime.now() + datetime.timedelta(0, 900)
 
     attempt_counter = attempt_counter + 1
