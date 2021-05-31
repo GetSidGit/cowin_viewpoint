@@ -4,11 +4,25 @@ import pywhatkit
 import sys
 import time
 import urllib.request
+from twilio.rest import Client
 
 def write_runtime_message(log_file_path, text):
     with open(log_file_path + "cowin_crawler.log", 'a') as data:
         data.write(text + "\n")
 
+
+def trigger_message_alert_with_twilio(user_number, alert_message, user_twilio_string, cowin_log_path):
+    account_sid = str(user_twilio_string).split("|")[0]
+    auth_token = str(user_twilio_string).split("|")[1]
+    client = Client(account_sid, auth_token)
+    from_whatsapp_number = 'whatsapp:' + str(user_twilio_string).split("|")[2]
+    to_whatsapp_number = 'whatsapp:' + user_number
+    message = client.messages.create(
+        from_=from_whatsapp_number,
+        body=alert_message,
+        to=to_whatsapp_number
+    )
+    write_runtime_message(cowin_log_path, "Twilio Message SID : " + str(message.sid))
 
 def trigger_message_alert(user_number, alert_message, time_delay, cowin_log_path):
     write_runtime_message(cowin_log_path, "Triggering Message alert to : " + user_number)
@@ -18,7 +32,8 @@ def trigger_message_alert(user_number, alert_message, time_delay, cowin_log_path
     write_runtime_message(cowin_log_path, alert_message)
 
 
-def print_message(session_dict, pincode, date, hit_dosage, hit_above_18, mobile_numbers, cowin_log_path):
+def print_message(session_dict, pincode, date, hit_dosage, hit_above_18, mobile_numbers, cowin_log_path,
+                  user_twilio_string):
     if hit_above_18:
         age_string = "18 plus"
     else:
@@ -34,7 +49,10 @@ def print_message(session_dict, pincode, date, hit_dosage, hit_above_18, mobile_
                     "Price : " + str(session_dict["fee"]) + " INR" + "\n" + \
                     "        --- @getsidgit "
     for number in mobile_numbers:
-        trigger_message_alert(number, alert_message, 80, cowin_log_path)
+        if user_twilio_string is not None or user_twilio_string != '':
+            trigger_message_alert_with_twilio(number, alert_message, user_twilio_string, cowin_log_path)
+        else:
+            trigger_message_alert(number, alert_message, 80, cowin_log_path)
 
 
 def place_request(endpoint, set_ssl_context, cowin_log_path):
@@ -74,27 +92,29 @@ def refresh_codes(main_state, state_endpoint, district_endpoint_base, set_ssl_co
 
 
 def hit_handler(pincode, search_date, dosage_count, hits_dict, session_entry, user_above_18, mobile_numbers,
-                cowin_log_path):
+                cowin_log_path, user_twilio_string):
     if pincode + search_date + str(session_entry["center_id"]) not in hits_dict.keys():
-        print_message(session_entry, pincode, search_date, dosage_count, user_above_18, mobile_numbers, cowin_log_path)
+        print_message(session_entry, pincode, search_date, dosage_count, user_above_18, mobile_numbers, cowin_log_path,
+                      user_twilio_string)
         hits_dict[pincode + search_date + str(session_entry["center_id"])] = "Place Holder"
 
 
 def initiate_hit_handler(district_session_entry, search_dosage, search_pincodes, pin_flag, search_date, hit_dict,
-                         search_18_flag, search_alert_numbers, cowin_log_path):
-    if district_session_entry["available_capacity_dose" + str(search_dosage)] != 0:
+                         search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string):
+    if district_session_entry["available_capacity_dose" + str(search_dosage)] > 2:
         if pin_flag == 1:
             hit_handler(str(district_session_entry["pincode"]), search_date, search_dosage, hit_dict,
                         district_session_entry,
-                        search_18_flag, search_alert_numbers, cowin_log_path)
+                        search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string)
         if str(district_session_entry["pincode"]) in search_pincodes:
             hit_handler(str(district_session_entry["pincode"]), search_date, search_dosage, hit_dict,
                         district_session_entry,
-                        search_18_flag, search_alert_numbers, cowin_log_path)
+                        search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string)
 
 
 def cowin_search(endpoint_base, districts, user_pincodes, search_date, above_18_flag, user_dosages, sleep,
-                 user_mobile_numbers, district_lookup, attempt_reference_dict, request_ssl_context, cowin_log_path):
+                 user_mobile_numbers, district_lookup, attempt_reference_dict, request_ssl_context, cowin_log_path,
+                 user_twilio_string):
     # Check if user intend to search in all pincodes of the entered districts
     all_pincodes_flag = 0
     if len(user_pincodes) == 1 and str.lower(user_pincodes[0]) == "all":
@@ -119,9 +139,11 @@ def cowin_search(endpoint_base, districts, user_pincodes, search_date, above_18_
                 for user_dose in user_dosages:
                     if above_18_flag and session_entry['min_age_limit'] == 18:
                         initiate_hit_handler(session_entry, user_dose, user_pincodes, all_pincodes_flag, date,
-                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path)
+                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path,
+                                             user_twilio_string)
                     elif above_18_flag is not True:
                         initiate_hit_handler(session_entry, user_dose, user_pincodes, all_pincodes_flag, date,
-                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path)
+                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path,
+                                             user_twilio_string)
 
         time.sleep(sleep)
