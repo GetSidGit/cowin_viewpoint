@@ -80,5 +80,5 @@ while True:
     attempt_counter = attempt_counter + 1
     write_runtime_message(log_path, "Fresh search Attempt count : " + str(attempt_counter))
     cowin_search(district_endpoint_base_url, districts_list, location_pincode, dates_list, above_18, dosages, 4,
-                 alert_mobiles, district_details['districts'], exemption_dict, ssl_context, log_path)
+                 alert_mobiles, district_details['districts'], exemption_dict, ssl_context, log_path, twilio_string)
     # break
