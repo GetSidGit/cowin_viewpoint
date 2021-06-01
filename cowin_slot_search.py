@@ -25,6 +25,14 @@ dosages = user_config['Dosage']
 alert_mobiles = user_config['Mobile_Numbers']
 drive_location = user_config['Drive_path_for_heartbeat']
 twilio_string = user_config['twilio_account_sid|auth_token|source_number_with_countrycode']
+gmail_connection_string = user_config['source_gmail_address|source_gmail_password|gmail_smtp_port']
+mail_list = None
+
+if len(str(gmail_connection_string).split("|")) == 3:
+    mail_list = user_config["Gmail_Addresses"]
+    mail_list.append(gmail_connection_string)
+else:
+    write_runtime_message(log_path, "Gmail string is not set correctly, assuming GMAIL component is not required !")
 
 # set endpoints - For faster search, we no more hit findbypin endpoint but rely on district level info
 district_endpoint_base_url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?"
@@ -80,5 +88,6 @@ while True:
     attempt_counter = attempt_counter + 1
     write_runtime_message(log_path, "Fresh search Attempt count : " + str(attempt_counter))
     cowin_search(district_endpoint_base_url, districts_list, location_pincode, dates_list, above_18, dosages, 4,
-                 alert_mobiles, district_details['districts'], exemption_dict, ssl_context, log_path, twilio_string)
+                 alert_mobiles, district_details['districts'], exemption_dict, ssl_context, log_path, twilio_string,
+                 mail_list)
     # break
