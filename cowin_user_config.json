@@ -1,11 +1,12 @@
 {
-    "State" : "Telangana",
-    "Districts" : ["Hyderabad", "Medchal", "Rangareddy", "Sangareddy"],
+    "State" : "state_name",
+    "Districts" : ["district", "another_district"],
     "Pincodes" : ["all"],
-    "Days" : 7,
-    "Mobile_Numbers": ["+919581147571"],
+    "Mobile_Numbers" : ["+91<my_number_1>", "+91<my_number_2>"],
+    "Gmail_Addresses" : ["my_mail_id@gmail.com"],
     "Dosage" : [1],
     "18_plus" : "True",
-    "Drive_path_for_heartbeat" : "/Users/sid/Desktop/Desktop/",
-    "twilio_account_sid|auth_token|source_number_with_countrycode" : "AC579aacd3b14307b341dfa087b0fe6b63|85c42bcc02627e29b6fc357756eb9f96|+14155238886"
+    "Drive_path_for_heartbeat" : "/google_drive/or/icloude/folder_location/",
+    "source_gmail_address|source_gmail_password|gmail_smtp_port" : "my_mail_id@gmail.com|my_password|465",
+    "twilio_account_sid|auth_token|source_number_with_countrycode" : "my_twilio_sid|my_auth_token|my_twilio_number_with_country_code"
 }
