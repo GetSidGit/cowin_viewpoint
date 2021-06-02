@@ -24,7 +24,7 @@ project_location=$(dirname "$0")
 echo "Starting Libraries check"
 
 # Invoke the core service
-$python_interpreter "$project_location"/cowin_slot_search.py
+$python_interpreter "$project_location"/setup_check.py
 
 if [ $? -ne 0 ]
 then
