@@ -83,7 +83,7 @@ def print_message(session_dict, pincode, date, hit_dosage, hit_above_18, mobile_
                     "Vaccine Name :" + str(session_dict["vaccine"]) + "\n" + \
                     "Slot :" + str(session_dict["slots"]) + "\n" + \
                     "Price : " + str(session_dict["fee"]) + " INR" + "\n" + \
-                    "        --- @getsidgit "
+                    "        --- @GetSidGit "
 
     if gmail_list is not None:
         trigger_gmail_alert(gmail_list, alert_message, cowin_log_path)
