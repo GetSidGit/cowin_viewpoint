@@ -50,13 +50,19 @@ This is an automation to find detect free slots on COWIN and notify users throug
     ``` vi cowin_user_config.json ```
     edit details, review and save with ":wq!" <br>
     
-    Before proceeding, take a quick look at - A detailed guide on filling user config sheet : **[cowin_user_config.json](#simple-user-config-guide)**<br>
+**Before proceeding, take a quick look at - A detailed guide on filling user config sheet : **[cowin_user_config.json](#simple-user-config-guide)**<br>**
 
  ----  SETUP Completed ----
  
- Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
+ **Before proceeding, take a quick look at - **[execution shortcuts](#execution-shortcuts)**<br>**
+
+Quick note on Alert priority :
+1. If Email and Phone numbers are entered : Email alerts trigger first followed by Whatsapp Alerts
+2. If None of Email and Phone numbers are entered : alerts are captured in logs for manual inspection
+3. If Both Phone Number and Twilio connection details are entered : Twilio bot alerts will be triggered
+4. Email alerts are triggered only if GMAIl connection string is added, else Email alerts are skipped
  
- Before proceeding, take a quick look at - **[execution shortcuts](#execution-shortcuts)**<br>
+ Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
  
   If you dont know or dont have any python virtual environments, <br>
     run : ``` ksh cowin_crawler_wrapper.ksh ```
@@ -85,10 +91,10 @@ This is an automation to find detect free slots on COWIN and notify users throug
  * **Mobile_Numbers : Optional** - Enter mobile numbers to alert with country code, in double quotes, comma seperated - just like above <br>
          Example 1 : ["+919999999999"] <br>
          Example 2 : ["+919999999999", "+919111111111"]  <br>
- * **Gmail_Addresses : Optional** - Only Gmail address is suported, please add GMAIL addresses to trigger alerts - just like above <br>
+ * **Gmail_Addresses : Optional** - Any mail address is supported but the user triggering must have a GMAIL account, , please add Email addresses to trigger alerts<br>
           Example 1 : ["my_mail_id@gmail.com"] <br>
-          Example 2 : ["my_mail_id@gmail.com", "my_another_mail_id@gmail.com"] <br> 
- * **source_gmail_address|source_gmail_password|gmail_smtp_port :  Optional** - To be filled only if "Gmail_Addresses" values are set. This string will be used to trigger GMAIL alerts. <br>
+          Example 2 : ["my_mail_id@yahoo.com", "my_another_mail_id@hotmail.com"] <br> 
+ * **source_gmail_address|source_gmail_password|gmail_smtp_port :  Optional  But Mandatory if Email Alerts are choosen (Gmail_Addresses)** - To be filled only if "Gmail_Addresses" values are set. This string will be used to trigger GMAIL alerts. <br>
          This is a combination of : user gmail address, user gmail password, gmail smtp port <br>
          If you are not sure of smtp port number : Example "465"  <br>
          alternatively You can also type any character for smtp port number to make code pick default 465 : Example : "I dont know" <br>
