@@ -124,7 +124,7 @@ Quick note on Alert priority :
  3. From you wahtsapp - send "join sing-run" to the number listed in the above URL. Done ! <br>
  4. your console home will have details on Account SID and Auth Key : **[Twilio console](https://console.twilio.com/?frameUrl=/console)**, keep a note of these two <br>
  5. use the twilio account SID, auth key and assigned phone number with country key aquired in the above steps and pass to "twilio_account_sid|auth_token|source_number_with_countrycode" in the cowin_user_config.json as listed in **[cowin_user_config.json](#simple-user-config-guide)**<br>
- 6. Check twilio specific content in **[Basic Debugging](basic-debugging)** before wrapping up Twilio Setup.
+ 6. Check twilio specific content in **[Basic Debugging](#basic-debugging)** before wrapping up Twilio Setup.
 
 ## Shortcuts and Logs
 
