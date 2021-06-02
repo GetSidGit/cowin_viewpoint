@@ -66,11 +66,11 @@ Quick note on Alert priority :
  
  Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
  
-  If you dont know or dont have any python virtual environments, <br>
-    run : ``` ksh cowin_crawler_wrapper.ksh ```
-  If you have a Virtual Environment and intentd to use it for this, same as above but pass venv actiave 
-      run : ``` ksh setup_check.sh <venv actiave location> ``` <br>
- 
+  If you dont know or dont have any python **virtual environments**, <br>
+    **run :** ``` ksh cowin_crawler_wrapper.ksh ```  <br>
+  If you have a **Virtual Environment** and intentd to use it for this, same as above but pass venv actiave <br>
+    **run :** ``` ksh setup_check.sh <venv actiave location> ``` <br>
+ <br>
  
  ## Simple user config guide
  
