@@ -33,7 +33,7 @@ No direct support to windows, but can be run through ubuntu shell (More on this 
 
 3. cd to the project location - ``` cd /code/path ```
 
-4. run ``` pip install -r package_details.txt  `` - you can copy and paste this command 
+4. run ``` pip install -r package_details.txt  ``` - you can copy and paste this command 
 
 5. To verify if the installtion has completed succesfully: <br>
     If you dont know or dont have any python virtual environments, <br>
@@ -45,7 +45,7 @@ No direct support to windows, but can be run through ubuntu shell (More on this 
     ``` vi cowin_user_config.json ```
     edit details, review and save with ":wq!" <br>
     
-    A detailed guide on filling user config sheet, click_here
+    Refer - A detailed guide on filling user config sheet : **[Simple user config guide](#simple-user-config-guide)**<br>
 
  -------------------------  SETUP Completed -------------------------
  
@@ -56,4 +56,10 @@ No direct support to windows, but can be run through ubuntu shell (More on this 
   If you have a Virtual Environment and intentd to use it for this, same as above but pass venv actiave 
       run : ``` ksh setup_check.sh <venv actiave location> ``` <br>
  
-<br>
+ 
+ ## Simple user config guide
+ 
+
+
+
+
