@@ -7,6 +7,7 @@ import urllib.request
 from twilio.rest import Client
 import smtplib
 
+
 def write_runtime_message(log_file_path, text):
     with open(log_file_path + "cowin_crawler.log", 'a') as data:
         data.write(text + "\n")
@@ -25,6 +26,7 @@ def trigger_message_alert_with_twilio(user_number, alert_message, user_twilio_st
     )
     write_runtime_message(cowin_log_path, "Twilio Message SID : " + str(message.sid))
 
+
 def trigger_message_alert(user_number, alert_message, time_delay, cowin_log_path):
     write_runtime_message(cowin_log_path, "Triggering Message alert to : " + user_number)
     trigger_time = datetime.datetime.now() + datetime.timedelta(0, time_delay)
@@ -32,8 +34,9 @@ def trigger_message_alert(user_number, alert_message, time_delay, cowin_log_path
     write_runtime_message(cowin_log_path, "Alert sent successfully with below message : ")
     write_runtime_message(cowin_log_path, alert_message)
 
+
 def trigger_gmail_alert(gmail_list, alert_message, cowin_log_path):
-    gmail_string = gmail_list[len(gmail_list)-1]
+    gmail_string = gmail_list[len(gmail_list) - 1]
     mail_subject = alert_message.split(" For Dosage :")[0]
     source_gmail_id = gmail_string.split("|")[0]
     source_gmail_pwd = gmail_string.split("|")[1]
@@ -74,20 +77,23 @@ def print_message(session_dict, pincode, date, hit_dosage, hit_above_18, mobile_
 
     alert_message = "Open Slot detected for " + age_string + " on " + str(date) + \
                     " in pincode : " + str(pincode) + " For Dosage : " + str(hit_dosage) + "\n" + \
-                    "Available Dose Capacity :" + str(session_dict["available_capacity_dose" + str(hit_dosage)]) + "\n"\
+                    "Available Dose Capacity :" + str(session_dict["available_capacity_dose"]) + "\n" \
                     + "Location :" + str(session_dict["name"]) + "\n" + \
                     "Address :" + str(session_dict["address"]) + "\n" + \
                     "Vaccine Name :" + str(session_dict["vaccine"]) + "\n" + \
                     "Slot :" + str(session_dict["slots"]) + "\n" + \
                     "Price : " + str(session_dict["fee"]) + " INR" + "\n" + \
                     "        --- @getsidgit "
+
+    if gmail_list is not None:
+        trigger_gmail_alert(gmail_list, alert_message, cowin_log_path)
+
     for number in mobile_numbers:
         if user_twilio_string is not None and user_twilio_string != '':
             trigger_message_alert_with_twilio(number, alert_message, user_twilio_string, cowin_log_path)
+            time.sleep(1)
         else:
             trigger_message_alert(number, alert_message, 80, cowin_log_path)
-    if gmail_list is not None:
-        trigger_gmail_alert(gmail_list, alert_message, cowin_log_path)
 
 
 def place_request(endpoint, set_ssl_context, cowin_log_path):
@@ -126,24 +132,63 @@ def refresh_codes(main_state, state_endpoint, district_endpoint_base, set_ssl_co
         json.dump(districts_reference, output_file)
 
 
-def hit_handler(pincode, search_date, dosage_count, hits_dict, session_entry, user_above_18, mobile_numbers,
+def hit_handler(pincode, search_date, dosage_count, hits_dict, bunch_of_hits, user_above_18, mobile_numbers,
                 cowin_log_path, user_twilio_string, gmail_list):
-    if pincode + search_date + str(session_entry["center_id"]) not in hits_dict.keys():
-        print_message(session_entry, pincode, search_date, dosage_count, user_above_18, mobile_numbers, cowin_log_path,
-                      user_twilio_string, gmail_list)
-        hits_dict[pincode + search_date + str(session_entry["center_id"])] = "Place Holder"
+    for session_entry in bunch_of_hits:
+        if pincode + search_date + str(session_entry["center_id"]) + str(session_entry["vaccine"]) not in \
+                hits_dict.keys():
+            print_message(session_entry, pincode, search_date, dosage_count, user_above_18, mobile_numbers,
+                          cowin_log_path, user_twilio_string, gmail_list)
+            hits_dict[pincode + search_date + str(session_entry["center_id"])] = "Place Holder"
+
+def get_vaccine_slot_details(source_district_session_entry, source_individual_session, source_search_dosage):
+
+    vaccine_lookup = source_district_session_entry['vaccine_fees']
+    details_dict = {
+        "center_id": source_district_session_entry['center_id'],
+        "date": source_individual_session['date'],
+        "available_capacity_dose": source_individual_session["available_capacity_dose" + str(source_search_dosage)],
+        "name": source_district_session_entry['name'],
+        "address": source_district_session_entry['address'],
+        "vaccine": source_individual_session['vaccine'],
+        "slots": str(source_individual_session['slots']),
+    }
+    vaccine_price_found = False
+    for entry in vaccine_lookup:
+        if not vaccine_price_found and entry["vaccine"] == source_individual_session['vaccine']:
+            vaccine_price_found = True
+            details_dict["fee"] = entry["fee"]
+    if not vaccine_price_found:
+        details_dict["fee"] = "Price Not found"
+
+    return details_dict
 
 
 def initiate_hit_handler(district_session_entry, search_dosage, search_pincodes, pin_flag, search_date, hit_dict,
                          search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string, gmail_list):
-    if district_session_entry["available_capacity_dose" + str(search_dosage)] > 2:
+    bunch_of_hits = []
+    hit_found = False
+    for individual_session in district_session_entry['sessions']:
+        if search_18_flag and individual_session['min_age_limit'] == 18 and \
+                individual_session["available_capacity_dose" + str(search_dosage)] > 2:
+            hit_found = True
+            slot_details = get_vaccine_slot_details(district_session_entry, individual_session, search_dosage)
+            bunch_of_hits.append(slot_details)
+            search_date = individual_session['date']
+        elif search_18_flag is not True and individual_session["available_capacity_dose" + str(search_dosage)] > 2:
+            hit_found = True
+            slot_details = get_vaccine_slot_details(district_session_entry, individual_session, search_dosage)
+            bunch_of_hits.append(slot_details)
+            search_date = individual_session['date']
+
+    if hit_found:
         if pin_flag == 1:
             hit_handler(str(district_session_entry["pincode"]), search_date, search_dosage, hit_dict,
-                        district_session_entry,
+                        bunch_of_hits,
                         search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string, gmail_list)
         if str(district_session_entry["pincode"]) in search_pincodes:
             hit_handler(str(district_session_entry["pincode"]), search_date, search_dosage, hit_dict,
-                        district_session_entry,
+                        bunch_of_hits,
                         search_18_flag, search_alert_numbers, cowin_log_path, user_twilio_string, gmail_list)
 
 
@@ -170,15 +215,14 @@ def cowin_search(endpoint_base, districts, user_pincodes, search_date, above_18_
             district_endpoint = endpoint_base + "district_id=" + str(district_id) + "&date=" + date
             vaccine_center_data = place_request(district_endpoint, request_ssl_context, cowin_log_path)
 
-            for session_entry in vaccine_center_data['sessions']:
+            for session_entry in vaccine_center_data['centers']:
                 for user_dose in user_dosages:
-                    if above_18_flag and session_entry['min_age_limit'] == 18:
-                        initiate_hit_handler(session_entry, user_dose, user_pincodes, all_pincodes_flag, date,
-                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path,
-                                             user_twilio_string, gmail_list)
-                    elif above_18_flag is not True:
-                        initiate_hit_handler(session_entry, user_dose, user_pincodes, all_pincodes_flag, date,
-                                             attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path,
-                                             user_twilio_string, gmail_list)
+                    # if above_18_flag and session_entry['min_age_limit'] == 18:
+                    initiate_hit_handler(session_entry, user_dose, user_pincodes, all_pincodes_flag, date,
+                                         attempt_reference_dict, above_18_flag, user_mobile_numbers, cowin_log_path,
+                                         user_twilio_string, gmail_list)
+                    # elif above_18_flag is not True: initiate_hit_handler(session_entry, user_dose, user_pincodes,
+                    # all_pincodes_flag, date, attempt_reference_dict, above_18_flag, user_mobile_numbers,
+                    # cowin_log_path, user_twilio_string, gmail_list)
 
         time.sleep(sleep)
