@@ -1,11 +1,23 @@
 import pathlib
 import ssl
 import os
+import sys
 from cowin import *
 
-# Set base paths
-log_path = os.path.expanduser('~/log_dump/cowin/')
-path = os.path.dirname(os.path.realpath(__file__)) + "/"
+# Set base paths - Support for Windows
+
+total_args = len(sys.argv)
+
+if total_args != 1 and total_args != 2:
+    print("Insufficient Arguments passed ! Triggering Fore Abort")
+    sys.exit()
+elif total_args == 2:
+    log_path = r'sys.argv[1]'
+    path = os.path.dirname(os.path.realpath(__file__)) + "\\"
+else:
+    log_path = os.path.expanduser('~/log_dump/cowin/')
+    path = os.path.dirname(os.path.realpath(__file__)) + "/"
+
 
 # Read config file
 with open(path + "cowin_user_config.json") as config_data:
@@ -19,7 +31,7 @@ ssl_context.verify_mode = ssl.CERT_NONE
 state_for_search = user_config["State"]
 districts_list = user_config["Districts"]
 location_pincode = user_config["Pincodes"]
-days = user_config['Days']
+# days = user_config['Days']
 above_18 = bool(user_config["18_plus"] == "True")
 dosages = user_config['Dosage']
 alert_mobiles = user_config['Mobile_Numbers']
