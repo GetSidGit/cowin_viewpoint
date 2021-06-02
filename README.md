@@ -69,7 +69,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
  
  **Before proceeding, take a quick look at - **[execution shortcuts](#execution-shortcuts)**<br>**
 
-## Quick note on Alert priority :
+## Quick note on Alert priority
 1. If Email and Phone numbers are entered : Email alerts trigger first followed by Whatsapp Alerts
 2. If None of Email and Phone numbers are entered : alerts are captured in logs for manual inspection
 3. If Both Phone Number and Twilio connection details are entered : Twilio bot alerts will be triggered
