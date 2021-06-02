@@ -116,7 +116,7 @@ def refresh_codes(main_state, state_endpoint, district_endpoint_base, set_ssl_co
 
     state_id = None
     for state in get_states["states"]:
-        if state["state_name"] == main_state and state_id is None:
+        if state["state_name"].lower() == main_state.lower() and state_id is None:
             # write_runtime_message(log_path,"State ID identified for : " + main_state)
             state_id = state["state_id"]
 
@@ -139,7 +139,8 @@ def hit_handler(pincode, search_date, dosage_count, hits_dict, bunch_of_hits, us
                 hits_dict.keys():
             print_message(session_entry, pincode, search_date, dosage_count, user_above_18, mobile_numbers,
                           cowin_log_path, user_twilio_string, gmail_list)
-            hits_dict[pincode + search_date + str(session_entry["center_id"])] = "Place Holder"
+            hits_dict[pincode + search_date + str(session_entry["center_id"]) + str(session_entry["vaccine"])] \
+                = "Place Holder "
 
 def get_vaccine_slot_details(source_district_session_entry, source_individual_session, source_search_dosage):
 
@@ -204,7 +205,7 @@ def cowin_search(endpoint_base, districts, user_pincodes, search_date, above_18_
             district_found = 0
             district_id = -1
             for district_dict in district_lookup:
-                if district_dict["district_name"] == district and district_found == 0:
+                if district_dict["district_name"].lower() == district.lower() and district_found == 0:
                     district_id = district_dict["district_id"]
                     district_found = 1
             if district_found == 0:
