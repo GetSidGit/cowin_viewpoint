@@ -6,7 +6,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
 
 </div>
 
-* Automated booking on slot availability is not yet added, but this can trigger alerts within around 2 seconds when an open slot is detected based on search critieria
+* This can trigger alerts within around 2 seconds when an open slot is detected based on search critieria
 
 * User should trigger this code from his computer and let it run as long as watchout for slots is required.
 
