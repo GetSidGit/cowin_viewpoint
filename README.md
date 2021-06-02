@@ -31,7 +31,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
             * Download official Ubuntu shell from windows app store : https://www.microsoft.com/store/productId/9NBLGGH4MSV6
             * control panel -> progreams -> "tuen windows features on and off" -> check "Windows subsystem for Linux"
             * Restart - you are good to go, continue from step 1
-
+   Windows users, please refer this : **Refer : [Shortcuts and Logs](#shortcuts-and-logs)** to find out how to naviage through filesystem through ubuntu shell <br>
 1. Verify if installed python version is 3.8+. If required, please use - https://python.org to download the latest version
 
 2. use git clone or download the code manually using the download button
@@ -131,6 +131,8 @@ Quick note on Alert priority :
 2. I recommend to run main wrapper as mentioned **[here](#invoke-the-main-wrapper)** with nohup such that the process is not depedent on your teminal session <br>
 3. you can create an alias for this nohup in .profile or .bash_profile and use shortcut to run <br>
 4. Default log path is : ~/  , so setting an alias for log will also help <br>
-
+5. When you run ubuntu shell for the first time, you will be prompted to set username and password, **please remember them to login again**
+6. Windows Ubuntu subsytem : you can navigae to windows folders by prefixing your path with "mnt"
+      Example : If you wish to go to 'Desktop' - ``` cd /mnt/c/users/<user name>/Desktop ```
      
      
