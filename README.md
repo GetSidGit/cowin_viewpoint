@@ -25,13 +25,22 @@ This is an automation to find detect free slots on COWIN and notify users throug
 * support to windows, Mac and Linux (watchout for special instructions for windows)
 
 
+### Before We Begin (Completly optional)
+
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Incase if you need any help on Python and Pip : <br>
+
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pip : [pip wheel](https://pip.pypa.io/en/stable/installing/) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Python Download : [Python download](https://www.python.org/downloads/) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubuntu Users : 
+           [resolving python version conflicts](https://www.admindiary.com/os/linux/error-could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or-directory.html) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Windows Users : [resolving python version conflicts](https://docs.python.org/3/using/windows.html#python-launcher-for-windows) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAC Users : You an alwys change symbolic link - [resolving python version conflicts](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf) <br>
+           
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** I recommend using Virtual Environment, use it if you already have one If you not aware, Never Mind ! ** <br>
+
+
 ### Quick & Easy steps 
 
-            **** FOR WINDOWS USERS ONLY - Below is a super simple option :
-            * Download official Ubuntu shell from windows app store : https://www.microsoft.com/store/productId/9NBLGGH4MSV6
-            * control panel -> progreams -> "tuen windows features on and off" -> check "Windows subsystem for Linux"
-            * Restart - you are good to go, continue from step 1
-   Windows users, please refer this : **Refer : [Shortcuts and Logs](#shortcuts-and-logs)** to find out how to naviage through filesystem through ubuntu shell <br>
 1. Verify if installed python version is 3.8+. If required, please use - https://python.org to download the latest version
 
 2. use git clone or download the code manually using the download button
