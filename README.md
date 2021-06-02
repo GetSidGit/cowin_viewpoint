@@ -72,7 +72,11 @@ Quick note on Alert priority :
     **run :** ``` ksh cowin_crawler_wrapper.ksh ```  <br>
   If you have a **Virtual Environment** and intentd to use it for this, same as above but pass venv actiave <br>
     **run :** ``` ksh setup_check.sh <venv actiave location> ``` <br>
- <br>
+ 
+ **If you wish to stop the process**, you can either kill manually or use the utility. **Refer : [Shortcuts and Logs](#shortcuts-and-logs)**
+ 
+ As an alternate (Not recommended), you can always invoke script directly with your python intepreter in the code folder - please note that, log cleanup will not be done:
+ ``` python3 cowin_slot_search.py ```
  
  ## Simple user config guide
  
