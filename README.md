@@ -45,20 +45,23 @@ This is an automation to find detect free slots on COWIN and notify users throug
 
 2. use git clone or download the code manually using the download button
 
-3. cd to the project location - ``` cd /code/path ```
+3. cd to the project location - ``` cd /code/path  |  Windows : cd C:\your\path```
 
 4. run ``` pip install -r package_details.txt  ``` - you can copy and paste this command 
 
 5. To verify if the installtion has completed succesfully: <br>
     If you dont know or dont have any python virtual environments, <br>
-      run : ``` ksh setup_check.sh ``` <br>
+      Mac & Linux run : ``` ksh setup_check.sh ``` <br>
+      Windows         :``` python3 setup_check.py ``` <br>
     If you have a Virtual Environment and intentd to use it for this, same as above but pass venv actiave 
-      run : ``` ksh setup_check.sh <venv actiave location> ``` <br>
-6. Open Browser (Chrome/Safari), Login to https://web.whatsapp.com/ and link to your whatsapp account and close the browser (**Only if you wish to get default whatsapp alerts - Not Email only or whatsapp alert with twilio**)
+       Mac & Linux run : ``` ksh setup_check.sh <venv actiave location> ``` <br>
+       Windows : Activate venv and run : :``` python3 setup_check.py ``` <br>
+6. Open Browser (Chrome/Safari), Login to https://web.whatsapp.com/ and link to your whatsapp account and close the browser (**Only if you wish to get default whatsapp alerts - Not Email only or whatsapp alert with twilio**). Checkout : **[Alerts Priority](#quick-note-on-alert-priority)**<br>**
       
 7. Input to the slot search is controlled by "cowin_user_config.json", just keyin values (self explanatory). Make sure you are in project folder (step 1)<br>
-    ``` vi cowin_user_config.json ```
+    Mac & Linux :``` vi cowin_user_config.json ```
     edit details, review and save with ":wq!" <br>
+    windows : Edit in notepad or any editor and save <br>
     
 **Before proceeding, take a quick look at - A detailed guide on filling user config sheet : **[cowin_user_config.json](#simple-user-config-guide)**<br>**
 
@@ -66,7 +69,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
  
  **Before proceeding, take a quick look at - **[execution shortcuts](#execution-shortcuts)**<br>**
 
-Quick note on Alert priority :
+## Quick note on Alert priority :
 1. If Email and Phone numbers are entered : Email alerts trigger first followed by Whatsapp Alerts
 2. If None of Email and Phone numbers are entered : alerts are captured in logs for manual inspection
 3. If Both Phone Number and Twilio connection details are entered : Twilio bot alerts will be triggered
@@ -78,20 +81,24 @@ Quick note on Alert priority :
  ## Invoke the main wrapper 
  
   If you dont know or dont have any python **virtual environments**, <br>
-    **run :** ``` ksh cowin_crawler_wrapper.ksh ```  <br>
+    **Mac & Linux run :** ``` ksh cowin_crawler_wrapper.ksh ```  <br>
+    **Windows     run :** ```python3 cowin_clot_search.py "C:\\my\\log\\folder\\"  | note the ending \\```
+    
   If you have a **Virtual Environment** and intentd to use it for this, same as above but pass venv actiave <br>
-    **run :** ``` ksh setup_check.sh <venv actiave location> ``` <br>
+    **Mac & Linux run :** ``` ksh setup_check.sh <venv actiave location> ``` <br>
+    **Windows     run :Activate venv and run ** ```python3 cowin_clot_search.py "C:\\my\\log\\folder\\"  | note the ending \\```
  
- **If you wish to stop the process**, you can either kill manually or use the utility. **Refer : [Shortcuts and Logs](#shortcuts-and-logs)**
+ **Mac & Linux : If you wish to stop the process**, you can either kill manually or use the utility. **Refer : [Shortcuts and Logs](#shortcuts-and-logs)**
+ **Windows : If you wish to stop the process**, just press 'ctrl + c'
  
- As an alternate (Not recommended), you can always invoke script directly with your python intepreter in the code folder - please note that, log cleanup will not be done:
+ As an alternate (Not recommended but default for Windows Users), you can always invoke script directly with your python intepreter in the code folder - please note that, log cleanup will not be done:
  ``` python3 cowin_slot_search.py ```
  
  ## Simple user config guide
  
- * **State : Mandatry entry !** - Enter the state name in double quotes <br>
+ * **State : Mandatry entry !** - Enter the state name in double quotes - Not Case sensitive but verify spelling<br>
         Example : "Telangana"
- * **Districts : Mandatry entry !** - Enter one or more districts, each in double quotes seperated by comma <br>
+ * **Districts : Mandatry entry !** - Enter one or more districts, each in double quotes seperated by comma - Not Case sensitive but verify spelling <br>
         Example 1 : ["Hyderabad"] <br>
         Example 2 : ["Hyderabad", "Rangareddy"]
 * **Pincodes : Mandatry entry !** - Enter "all" if you want to search on all pincodes for the districts above in the state mentioned above. You can also add multiple pincodes in double quotes seperated by commas just like how you did for "Districts" <br>
@@ -156,3 +163,10 @@ Quick note on Alert priority :
            In anycase, if you observe "send message" not happening from an open https://web.whatsapp.com/ session automatically, you can manually click it and close the browser.
            <br> Alerts through https://web.whatsapp.com/ will take around 40 to 50 seconds to trigger message alert <br>
            Use only Chrome/Safari for basic whatsapp alerts (Not Twilio)
+5. Windows Users : You may find log captured in the script folder, Check in that location once if you are looking for missing log file - Arument might have not properly passed when triggering the script<br>
+
+
+## Final Note :
+
+I hope this will help you to find the slot and get yourself vaccinated.<br>
+Stay Home Stay Safe
