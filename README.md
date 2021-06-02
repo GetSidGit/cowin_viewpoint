@@ -148,6 +148,9 @@ This is an automation to find detect free slots on COWIN and notify users throug
         Windows Example : "C\\google_drive\\icloud\\lder_location\\" <br>
         Setting Icloud folder : [Icloud Desktop folder setup](https://support.apple.com/en-in/HT206985) <br>
         Setting Gdrive folder : [GDrive Desktop folder setup](https://support.google.com/a/users/answer/9965580?hl=en) <br>
+
+Note : you are not expected to share the user config file
+
 <br>
  ## Twilio Setup
  
@@ -163,7 +166,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
 1. **If you wish to stop the running process**, you can simply run : ``` ksh kill_cowin_crawler.sh ``` from the folder where the clone/code is residing <br>
 2. I recommend to run main wrapper as mentioned **[Invoing Main Wrapper](#invoke-the-main-wrapper)** with nohup such that the process is not depedent on your teminal session <br>
 3. you can create an alias for this nohup in .profile or .bash_profile and use shortcut to run <br>
-4. Default log path is : ~/  , so setting an alias for log will also help <br>
+4. Default log path is : ~/log_dump/cowin/  , so setting an alias for log will also help <br>
 5. When you run ubuntu shell for the first time, you will be prompted to set username and password, **please remember them to login again**
 6. Windows Ubuntu subsytem : you can navigae to windows folders by prefixing your path with "mnt"
       Example : If you wish to go to 'Desktop' - ``` cd /mnt/c/users/<user name>/Desktop ```
