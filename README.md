@@ -73,7 +73,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
 1. If Email and Phone numbers are entered : Email alerts trigger first followed by Whatsapp Alerts
 2. If None of Email and Phone numbers are entered : alerts are captured in logs for manual inspection
 3. If Both Phone Number and Twilio connection details are entered : Twilio bot alerts will be triggered
-4. Email alerts are triggered only if GMAIl connection string is added, else Email alerts are skipped
+4. Email alerts are triggered only if GMAIL connection string is added, else Email alerts are skipped
 5. Alerts are restricted to one alert per center for a vaccine in a day to avoid spamming
  
  Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
