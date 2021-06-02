@@ -111,7 +111,10 @@ Quick note on Alert priority :
 
 
 
- ## Twilio Setup
+ ## Easy Twilio Setup
  
- 1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough
- 2. 
+ 1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough <br>
+ 2. Open whatsapp sandbox : https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn?frameUrl=%2Fconsole%2Fsms%2Fwhatsapp%2Flearn%3Fx-target-region%3Dus1 <br>
+ 3. From you wahtsapp - send "join sing-run" to the number listed in the above URL. Done ! <br>
+ 4. your console home will have details on Account SID and Auth Key : https://console.twilio.com/?frameUrl=/console, keep a note of these two <br>
+ 5. use the twilio account SID, auth key and assigned phone number with country key aquired in the above steps and pass to "twilio_account_sid|auth_token|source_number_with_countrycode" in the cowin_user_config.json as listed in **[cowin_user_config.json](#simple-user-config-guide)**<br>
