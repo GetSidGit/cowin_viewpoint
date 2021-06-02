@@ -35,7 +35,7 @@ else:
     write_runtime_message(log_path, "Gmail string is not set correctly, assuming GMAIL component is not required !")
 
 # set endpoints - For faster search, we no more hit findbypin endpoint but rely on district level info
-district_endpoint_base_url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?"
+district_endpoint_base_url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?"
 states_url = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
 districts_base_url = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/"
 
@@ -55,9 +55,13 @@ for dosage in dosages:
 # Generate dates for the specified range (API for one week is not working as expected so manually checking for each day
 base_date = datetime.date.today()
 dates_list = []
+
+"""
 for day in range(days):
     new_date = base_date + datetime.timedelta(days=day)
     dates_list.append(str(new_date.strftime("%d-%m-%Y")))
+"""
+dates_list.append(base_date.strftime("%d-%m-%Y"))
 
 drive_path_present = False
 if drive_location is not None and drive_location != "":
