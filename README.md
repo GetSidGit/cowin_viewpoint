@@ -109,7 +109,7 @@ Quick note on Alert priority :
  * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. I highly recomment using this as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
         Example : "/google_drive/or/icloude/folder_location/"
 
- ## Easy Twilio Setup
+ ## Twilio Setup
  
  1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough <br>
  2. Open whatsapp sandbox : [Twilio whatsapp sandbox](https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn?frameUrl=%2Fconsole%2Fsms%2Fwhatsapp%2Flearn%3Fx-target-region%3Dus1) <br>
