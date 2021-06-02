@@ -66,6 +66,8 @@ Quick note on Alert priority :
  
  Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
  
+ ## Invoke the main wrapper 
+ 
   If you dont know or dont have any python **virtual environments**, <br>
     **run :** ``` ksh cowin_crawler_wrapper.ksh ```  <br>
   If you have a **Virtual Environment** and intentd to use it for this, same as above but pass venv actiave <br>
@@ -102,17 +104,29 @@ Quick note on Alert priority :
          alternatively You can also type any character for smtp port number to make code pick default 465 : Example : "I dont know" <br>
          Example 1 : "my_gmail_id@gmail.com|my_gmail_password|465" <br>
          Example 2 : "my_gmail_id@gmail.com|my_gmail_password|i dont know" <br>
-* **twilio_account_sid|auth_token|source_number_with_countrycode :  Optional** - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - I Highly recommend using this. Refer **[twilio setup](#twilio-setup)**  to find out how you can use it 
-         you can get below details from you twilio console
+* **twilio_account_sid|auth_token|source_number_with_countrycode :  Optional** - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - **I Highly recommend using this for faster alerts**. <br>
+         Refer **[Quick and Simple twilio setup](#twilio-setup)**  to find out how you can use it <br>
+         you can get below details from you twilio console <br>
          This is a combination of : twilio account sid, twilio account auth token, assigned twilio number <br>
          Example 1 : "my_twilio_account_sid|my_twilio_account_auth_code|my_assigned_twilio_number" <br>
- * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. I highly recomment using this as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
+ * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. <br>
+            **I highly recommend using this** as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
         Example : "/google_drive/or/icloude/folder_location/"
 
  ## Twilio Setup
  
  1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough <br>
- 2. Open whatsapp sandbox : [Twilio whatsapp sandbox](https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn?frameUrl=%2Fconsole%2Fsms%2Fwhatsapp%2Flearn%3Fx-target-region%3Dus1) <br>
+ 2. Open whatsapp sandbox : **[Twilio whatsapp sandbox](https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn?frameUrl=%2Fconsole%2Fsms%2Fwhatsapp%2Flearn%3Fx-target-region%3Dus1)** <br>
  3. From you wahtsapp - send "join sing-run" to the number listed in the above URL. Done ! <br>
- 4. your console home will have details on Account SID and Auth Key : [Twilio console](https://console.twilio.com/?frameUrl=/console), keep a note of these two <br>
+ 4. your console home will have details on Account SID and Auth Key : **[Twilio console](https://console.twilio.com/?frameUrl=/console)**, keep a note of these two <br>
  5. use the twilio account SID, auth key and assigned phone number with country key aquired in the above steps and pass to "twilio_account_sid|auth_token|source_number_with_countrycode" in the cowin_user_config.json as listed in **[cowin_user_config.json](#simple-user-config-guide)**<br>
+
+## Shortcuts and Logs
+
+1. **If you wish to stop the running process**, you can simply run : ``` ksh kill_cowin_crawler.sh ``` from the folder where the clone/code is residing <br>
+2. I recommend to run main wrapper as mentioned **[here](#invoke-the-main-wrapper)** with nohup such that the process is not depedent on your teminal session <br>
+3. you can create an alias for this nohup in .profile or .bash_profile and use shortcut to run <br>
+4. Default log path is : ~/  , so setting an alias for log will also help <br>
+
+     
+     
