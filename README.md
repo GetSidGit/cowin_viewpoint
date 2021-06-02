@@ -45,8 +45,9 @@ This is an automation to find detect free slots on COWIN and notify users throug
       run : ``` ksh setup_check.sh ``` <br>
     If you have a Virtual Environment and intentd to use it for this, same as above but pass venv actiave 
       run : ``` ksh setup_check.sh <venv actiave location> ``` <br>
+6. Open Browser (Chrome/Safari), Login to https://web.whatsapp.com/ and link to your whatsapp account and close the browser (**Only if you wish to get default whatsapp alerts - Not Email only or whatsapp alert with twilio**)
       
-6. Input to the slot search is controlled by "cowin_user_config.json", just keyin values (self explanatory). Make sure you are in project folder (step 1)<br>
+7. Input to the slot search is controlled by "cowin_user_config.json", just keyin values (self explanatory). Make sure you are in project folder (step 1)<br>
     ``` vi cowin_user_config.json ```
     edit details, review and save with ":wq!" <br>
     
@@ -61,6 +62,7 @@ Quick note on Alert priority :
 2. If None of Email and Phone numbers are entered : alerts are captured in logs for manual inspection
 3. If Both Phone Number and Twilio connection details are entered : Twilio bot alerts will be triggered
 4. Email alerts are triggered only if GMAIl connection string is added, else Email alerts are skipped
+5. Alerts are restricted to one alert per center for a vaccine in a day to avoid spamming
  
  Now that setup is completed, you are good to start, its extreemly simple ! Make sure you are in project directory (Step 1 above)
  
@@ -107,3 +109,9 @@ Quick note on Alert priority :
  * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. I highly recomment using this as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
         Example : "/google_drive/or/icloude/folder_location/"
 
+
+
+ ## Twilio Setup
+ 
+ 1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough
+ 2. 
