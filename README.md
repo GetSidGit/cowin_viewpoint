@@ -124,15 +124,26 @@ Quick note on Alert priority :
  3. From you wahtsapp - send "join sing-run" to the number listed in the above URL. Done ! <br>
  4. your console home will have details on Account SID and Auth Key : **[Twilio console](https://console.twilio.com/?frameUrl=/console)**, keep a note of these two <br>
  5. use the twilio account SID, auth key and assigned phone number with country key aquired in the above steps and pass to "twilio_account_sid|auth_token|source_number_with_countrycode" in the cowin_user_config.json as listed in **[cowin_user_config.json](#simple-user-config-guide)**<br>
+ 6. Check twilio specific content in **[Basic Debugging](basic-debugging)** before wrapping up Twilio Setup.
 
 ## Shortcuts and Logs
 
 1. **If you wish to stop the running process**, you can simply run : ``` ksh kill_cowin_crawler.sh ``` from the folder where the clone/code is residing <br>
-2. I recommend to run main wrapper as mentioned **[here](#invoke-the-main-wrapper)** with nohup such that the process is not depedent on your teminal session <br>
+2. I recommend to run main wrapper as mentioned **[Invoing Main Wrapper](#invoke-the-main-wrapper)** with nohup such that the process is not depedent on your teminal session <br>
 3. you can create an alias for this nohup in .profile or .bash_profile and use shortcut to run <br>
 4. Default log path is : ~/  , so setting an alias for log will also help <br>
 5. When you run ubuntu shell for the first time, you will be prompted to set username and password, **please remember them to login again**
 6. Windows Ubuntu subsytem : you can navigae to windows folders by prefixing your path with "mnt"
       Example : If you wish to go to 'Desktop' - ``` cd /mnt/c/users/<user name>/Desktop ```
      
-     
+
+## Basic Debugging
+
+1. If wrapper is invoked with nohup and failed for some reason - please review the contents of nohup.out on your home directory or on the place of exeuction.
+2. For Twilio users - **A reply to at least one message must be sent to the bot within 24 hours** to continue sending alerts beyond that
+3. Twilio messages status can also be tracked from Twilio user console to understand the failure reason
+4. If Phone number provided **without Twilio String**, code will attempt to trigger whatsapp alert by autmatially opening https://web.whatsapp.com/ and send a message.
+           incase while you are using your computer and the process opened the browser and trying to send message - try not to click any buttons
+           In anycase, if you observe "send message" not happening from an open https://web.whatsapp.com/ session automatically, you can manually click it and close the browser.
+           Alerts through https://web.whatsapp.com/ will take around 40 to 50 seconds to trigger message alert
+           Use only Chrome/Safari for basic whatsapp alerts (Not Twilio)
