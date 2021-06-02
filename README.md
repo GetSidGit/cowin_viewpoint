@@ -98,41 +98,57 @@ This is an automation to find detect free slots on COWIN and notify users throug
  
  * **State : Mandatry entry !** - Enter the state name in double quotes - Not Case sensitive but verify spelling<br>
         Example : "Telangana"
+        <br>
+        <br>
  * **Districts : Mandatry entry !** - Enter one or more districts, each in double quotes seperated by comma - Not Case sensitive but verify spelling <br>
         Example 1 : ["Hyderabad"] <br>
         Example 2 : ["Hyderabad", "Rangareddy"]
+        <br>
+        <br>
 * **Pincodes : Mandatry entry !** - Enter "all" if you want to search on all pincodes for the districts above in the state mentioned above. You can also add multiple pincodes in double quotes seperated by commas just like how you did for "Districts" <br>
         Example 1 : ["all"] <br>
         Example 2 : ["500001"]  <br> 
         Example 3 : ["500001", "500002"] <br>
+        <br>
  * **Dosage : Mandatry entry !** - The dosage which you are looking for. This is a number and cannot be less than 1 and greater than 2
          Example 1 : [1]
          Example 2 : [2]
          Example 3 : [1, 2]
+         <br>
+         <br>
  * **18_plus : Mandatory entry !** - set "True" if you want to search for 18 plus, "False" if you want to search for 45 plus
          Example 1 : "True"
          Example 2 : "False"
+         <br>
+         <br>
  * **Mobile_Numbers : Optional** - Enter mobile numbers to alert with country code, in double quotes, comma seperated - just like above <br>
          Example 1 : ["+919999999999"] <br>
          Example 2 : ["+919999999999", "+919111111111"]  <br>
+         <br>
  * **Gmail_Addresses : Optional** - Any mail address is supported but the user triggering must have a GMAIL account, , please add Email addresses to trigger alerts<br>
           Example 1 : ["my_mail_id@gmail.com"] <br>
           Example 2 : ["my_mail_id@yahoo.com", "my_another_mail_id@hotmail.com"] <br> 
+          <br>
  * **source_gmail_address|source_gmail_password|gmail_smtp_port :  Optional  But Mandatory if Email Alerts are choosen (Gmail_Addresses)** - To be filled only if "Gmail_Addresses" values are set. This string will be used to trigger GMAIL alerts. <br>
          This is a combination of : user gmail address, user gmail password, gmail smtp port <br>
          If you are not sure of smtp port number : Example "465"  <br>
          alternatively You can also type any character for smtp port number to make code pick default 465 : Example : "I dont know" <br>
          Example 1 : "my_gmail_id@gmail.com|my_gmail_password|465" <br>
          Example 2 : "my_gmail_id@gmail.com|my_gmail_password|i dont know" <br>
+         <br>
 * **twilio_account_sid|auth_token|source_number_with_countrycode :  Optional** - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - **I Highly recommend using this for faster alerts**. <br>
          Refer **[Quick and Simple twilio setup](#twilio-setup)**  to find out how you can use it <br>
          you can get below details from you twilio console <br>
          This is a combination of : twilio account sid, twilio account auth token, assigned twilio number <br>
          Example 1 : "my_twilio_account_sid|my_twilio_account_auth_code|my_assigned_twilio_number" <br>
+         <br>
  * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. <br>
-            **I highly recommend using this** as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
-        Example : "/google_drive/or/icloude/folder_location/"
-
+            **I highly recommend using this** as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted ! <br>
+        Mac and Linux Example : "/google_drive/or/icloude/folder_location/" <br>
+        Windows Example : "C\\google_drive\\icloud\\lder_location\\" <br>
+        Setting Icloud folder : [Icloud Desktop folder setup](https://support.apple.com/en-in/HT206985) <br>
+        Setting Gdrive folder : [GDrive Desktop folder setup](https://support.google.com/a/users/answer/9965580?hl=en) <br>
+<br>
  ## Twilio Setup
  
  1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough <br>
