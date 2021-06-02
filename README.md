@@ -12,6 +12,8 @@ This is an automation to find detect free slots on COWIN and notify users throug
 
 * Supports Twilio
 
+* Creates HeartBeat file for run monitor from Android or Iphone by pointing to the sync folder
+
 * Automated utilities are built for easy setup and quick start
 
 * Python version greater than 3.8 is a minimum requirement
@@ -20,12 +22,15 @@ This is an automation to find detect free slots on COWIN and notify users throug
 
 * To use this, either git clone or download the code manually using the download button
 
-* No direct support to windows, but can be run through ubuntu shell (More on this below)
-
-
+* support to windows, Mac and Linux (watchout for special instructions for windows)
 
 
 ### Quick & Easy steps 
+
+            **** FOR WINDOWS USERS ONLY - Below is a super simple option :
+            * Download official Ubuntu shell from windows app store : https://www.microsoft.com/store/productId/9NBLGGH4MSV6
+            * control panel -> progreams -> "tuen windows features on and off" -> check "Windows subsystem for Linux"
+            * Restart - you are good to go, continue from step 1
 
 1. Verify if installed python version is 3.8+. If required, please use - https://python.org to download the latest version
 
@@ -61,38 +66,38 @@ This is an automation to find detect free slots on COWIN and notify users throug
  
  ## Simple user config guide
  
- * State : Mandatry entry ! - Enter the state name in double quotes <br>
+ * **State : Mandatry entry !** - Enter the state name in double quotes <br>
         Example : "Telangana"
- * Districts : Mandatry entry ! - Enter one or more districts, each in double quotes seperated by comma <br>
+ * **Districts : Mandatry entry !** - Enter one or more districts, each in double quotes seperated by comma <br>
         Example 1 : ["Hyderabad"] <br>
         Example 2 : ["Hyderabad", "Rangareddy"]
-* Pincodes : Mandatry entry ! - Enter "all" if you want to search on all pincodes for the districts above in the state mentioned above. You can also add multiple pincodes in double quotes seperated by commas just like how you did for "Districts" <br>
+* **Pincodes : Mandatry entry !** - Enter "all" if you want to search on all pincodes for the districts above in the state mentioned above. You can also add multiple pincodes in double quotes seperated by commas just like how you did for "Districts" <br>
         Example 1 : ["all"] <br>
         Example 2 : ["500001"]  <br> 
         Example 3 : ["500001", "500002"] <br>
- * Dosage : Mandatry entry ! - The dosage which you are looking for. This is a number and cannot be less than 1 and greater than 2
+ * **Dosage : Mandatry entry !** - The dosage which you are looking for. This is a number and cannot be less than 1 and greater than 2
          Example 1 : [1]
          Example 2 : [2]
          Example 3 : [1, 2]
- * 18_plus : Mandatory entry ! - set "True" if you want to search for 18 plus, "False" if you want to search for 45 plus
+ * **18_plus : Mandatory entry !** - set "True" if you want to search for 18 plus, "False" if you want to search for 45 plus
          Example 1 : "True"
          Example 2 : "False"
- * Mobile_Numbers : Optional - Enter mobile numbers to alert with country code, in double quotes, comma seperated - just like above <br>
+ * **Mobile_Numbers : Optional** - Enter mobile numbers to alert with country code, in double quotes, comma seperated - just like above <br>
          Example 1 : ["+919999999999"] <br>
          Example 2 : ["+919999999999", "+919111111111"]  <br>
- * Gmail_Addresses : Optional - Only Gmail address is suported, please add GMAIL addresses to trigger alerts - just like above <br>
+ * **Gmail_Addresses : Optional** - Only Gmail address is suported, please add GMAIL addresses to trigger alerts - just like above <br>
           Example 1 : ["my_mail_id@gmail.com"] <br>
           Example 2 : ["my_mail_id@gmail.com", "my_another_mail_id@gmail.com"] <br> 
- * source_gmail_address|source_gmail_password|gmail_smtp_port :  Optional - To be filled only if "Gmail_Addresses" values are set. This string will be used to trigger GMAIL alerts. <br>
+ * **source_gmail_address|source_gmail_password|gmail_smtp_port :  Optional** - To be filled only if "Gmail_Addresses" values are set. This string will be used to trigger GMAIL alerts. <br>
          This is a combination of : user gmail address, user gmail password, gmail smtp port <br>
          If you are not sure of smtp port number : Example "465"  <br>
          alternatively You can also type any character for smtp port number to make code pick default 465 : Example : "I dont know" <br>
          Example 1 : "my_gmail_id@gmail.com|my_gmail_password|465" <br>
          Example 2 : "my_gmail_id@gmail.com|my_gmail_password|i dont know" <br>
-* twilio_account_sid|auth_token|source_number_with_countrycode :  Optional - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - I Highly recommend using this. Refer **[twilio setup](#twilio-setup)**  to find out how you can use it 
+* **twilio_account_sid|auth_token|source_number_with_countrycode :  Optional** - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - I Highly recommend using this. Refer **[twilio setup](#twilio-setup)**  to find out how you can use it 
          you can get below details from you twilio console
          This is a combination of : twilio account sid, twilio account auth token, assigned twilio number <br>
          Example 1 : "my_twilio_account_sid|my_twilio_account_auth_code|my_assigned_twilio_number" <br>
- * Drive_path_for_heartbeat :  Optional - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. I highly recomment using this as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
+ * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. I highly recomment using this as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted !
         Example : "/google_drive/or/icloude/folder_location/"
 
