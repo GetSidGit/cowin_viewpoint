@@ -12,12 +12,11 @@ if total_args != 1 and total_args != 2:
     print("Insufficient Arguments passed ! Triggering Fore Abort")
     sys.exit()
 elif total_args == 2:
-    log_path = r'sys.argv[1]'
+    log_path = sys.argv[1]
     path = os.path.dirname(os.path.realpath(__file__)) + "\\"
 else:
     log_path = os.path.expanduser('~/log_dump/cowin/')
     path = os.path.dirname(os.path.realpath(__file__)) + "/"
-
 
 # Read config file
 with open(path + "cowin_user_config.json") as config_data:
