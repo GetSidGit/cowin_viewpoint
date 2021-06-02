@@ -142,8 +142,8 @@ Quick note on Alert priority :
 1. If wrapper is invoked with nohup and failed for some reason - please review the contents of nohup.out on your home directory or on the place of exeuction.
 2. For Twilio users - **A reply to at least one message must be sent to the bot within 24 hours** to continue sending alerts beyond that
 3. Twilio messages status can also be tracked from Twilio user console to understand the failure reason
-4. If Phone number provided **without Twilio String**, code will attempt to trigger whatsapp alert by autmatially opening https://web.whatsapp.com/ and send a message.
-           incase while you are using your computer and the process opened the browser and trying to send message - try not to click any buttons
+4. If Phone number provided **without Twilio String**, code will attempt to trigger whatsapp alert by autmatially opening https://web.whatsapp.com/ and send a message. <br>
+           incase while you are using your computer and the process opened the browser and trying to send message - try not to click any buttons <br>
            In anycase, if you observe "send message" not happening from an open https://web.whatsapp.com/ session automatically, you can manually click it and close the browser.
-           Alerts through https://web.whatsapp.com/ will take around 40 to 50 seconds to trigger message alert
+           <br> Alerts through https://web.whatsapp.com/ will take around 40 to 50 seconds to trigger message alert <br>
            Use only Chrome/Safari for basic whatsapp alerts (Not Twilio)
