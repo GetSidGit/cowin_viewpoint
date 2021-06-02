@@ -1,6 +1,6 @@
 # COWIN ViewPoint
 
-<h2 align="center"> Automated COWIN Slots Notifier on Email & Whatsapp </h1>
+<h2 align="center"> Automated COWIN Slots Availability Alerts on Email & Whatsapp </h1>
 
 This is an automation to find detect free slots on COWIN and notify users through Whatsapp Message and Mail Alerts
 
