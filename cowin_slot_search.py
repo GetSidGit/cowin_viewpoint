@@ -84,7 +84,7 @@ message = ""
 # Initialize variable to publish alive beat for every 15 minutes
 reference_time = datetime.datetime.now() + datetime.timedelta(0, 900)
 if drive_path_present:
-    pathlib.Path(drive_location + '/cowin_alive.log').touch()
+    pathlib.Path(drive_location + 'cowin_alive.log').touch()
 
 # Load district lookup
 file = open(path + "districts_reference.json", "r")
