@@ -1,4 +1,4 @@
-# cowin viewpoint
+# COWIN ViewPoint
 
 <h2 align="center"> Automated COWIN Slots Notifier on Email & Whatsapp </h1>
 
