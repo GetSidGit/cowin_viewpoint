@@ -136,6 +136,9 @@ This is an automation to find detect free slots on COWIN and notify users throug
          Example 1 : "my_gmail_id@gmail.com|my_gmail_password|465" <br>
          Example 2 : "my_gmail_id@gmail.com|my_gmail_password|i dont know" <br>
          <br>
+         **Note :** When using this, login to Google Account page -> Security -> "Less Secure App Access" -> Turn it On. This is required for the code to trigger mail alerts.
+         <br>
+         <br>
 * **twilio_account_sid|auth_token|source_number_with_countrycode :  Optional** - Use this option to configure you twilio account to send whatsapp messages. This will let you get super fast message alerts. Setup is super fast - **I Highly recommend using this for faster alerts**. <br>
          Refer **[Quick and Simple twilio setup](#twilio-setup)**  to find out how you can use it <br>
          you can get below details from you twilio console <br>
@@ -152,6 +155,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
 Note : you are not expected to share the user config file
 
 <br>
+
  ## Twilio Setup
  
  1. Signup for free Twilio trial account - you will get free credits of around 16 dollars - this credit is more than enough <br>
