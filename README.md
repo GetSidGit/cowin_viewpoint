@@ -86,13 +86,13 @@ This is an automation to find detect free slots on COWIN and notify users throug
     
   If you have a **Virtual Environment** and intentd to use it for this, same as above but pass venv actiave <br>
     **Mac & Linux run :** ``` ksh setup_check.sh <venv actiave location> ``` <br>
-    **Windows     run :Activate venv and run ** ```python3 cowin_clot_search.py "C:\\my\\log\\folder\\"  | note the ending \\```
+    **Windows     run :Activate venv and run ** ```python3 cowin_clot_search.py "C:\\my\\log\\folder\\"  | make sure that the folder is created and do note the ending \\```
  
  **Mac & Linux : If you wish to stop the process**, you can either kill manually or use the utility. **Refer : [Shortcuts and Logs](#shortcuts-and-logs)**
  **Windows : If you wish to stop the process**, just press 'ctrl + c'
  
  As an alternate (Not recommended but default for Windows Users), you can always invoke script directly with your python intepreter in the code folder - please note that, log cleanup will not be done:
- ``` python3 cowin_slot_search.py ```
+ ``` python3 cowin_slot_search.py | Mac nad Linux users : please make sure ~/log_dump/cowin/ folder is created```
  
  ## Simple user config guide
  
@@ -148,7 +148,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
  * **Drive_path_for_heartbeat :  Optional** - path to your google drive or icloud sync folder on desktop to create and refresh a zero byte heartbeat file - so that user can check process alive status from phone through "folders" app on iphone or "drive" app on android. <br>
             **I highly recommend using this** as you will know if the process you triggered is running or not. If you see the trigger file from phone with timestamp of 20 - 25 minutes below you current time (provided you have propert internet connection) - indicates that your process triggered on your laptop might have aborted ! <br>
         Mac and Linux Example : "/google_drive/or/icloude/folder_location/" <br>
-        Windows Example : "C\\google_drive\\icloud\\lder_location\\" <br>
+        Windows Example : "C\\\google_drive\\\icloud\\\lder_location\\\\" <br>
         Setting Icloud folder : [Icloud Desktop folder setup](https://support.apple.com/en-in/HT206985) <br>
         Setting Gdrive folder : [GDrive Desktop folder setup](https://support.google.com/a/users/answer/9965580?hl=en) <br>
 
