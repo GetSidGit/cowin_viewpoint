@@ -47,7 +47,7 @@ This is an automation to find detect free slots on COWIN and notify users throug
 
 3. cd to the project location - ``` cd /code/path  |  Windows : cd C:\your\path```
 
-4. run ``` pip install -r package_details.txt  ``` - you can copy and paste this command 
+4. run ``` pip install -r package_details.txt  ``` - you can copy and paste this command. Windows : If Twilio installation is failed, please refer : **[Basic Debugging](#basic-debugging)**
 
 5. To verify if the installtion has completed succesfully: <br>
     If you dont know or dont have any python virtual environments, <br>
@@ -187,6 +187,10 @@ Note : you are not expected to share the user config file
            <br> Alerts through https://web.whatsapp.com/ will take around 40 to 50 seconds to trigger message alert <br>
            Use only Chrome/Safari for basic whatsapp alerts (Not Twilio)
 5. Windows Users : You may find log captured in the script folder, Check in that location once if you are looking for missing log file - Arument might have not properly passed when triggering the script<br>
+6. Windows : If Twilio package installation failed for "File Not Found error" when you run pip -r instal, you can use below steps to enable LongPaths and retry
+   1. Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem.
+   2. Double click LongPathsEnabled.
+   3. Set to 1 and click OK.
 
 
 ## Final Note :
